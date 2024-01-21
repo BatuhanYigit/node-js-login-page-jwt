@@ -1,5 +1,6 @@
 const user = require("../models/user.model");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const APIError = require("../utils/errors");
 
 
 const login = async (req, res) => {
@@ -15,7 +16,8 @@ const register = async (req, res) => {
     const userCheck = await user.findOne({ email })
 
     if (userCheck) {
-        console.log("Email already use!");
+        throw new APIError("Email already use! ", 401)
+
     }
 
     req.body.password = await bcrypt.hash(req.body.password, 10)
