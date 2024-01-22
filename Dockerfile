@@ -8,6 +8,13 @@ RUN npm install
 
 COPY . .
 
+#Nodemon install hot reload
+RUN npm install -g nodemon
+
 EXPOSE 5000
 
-CMD ["node", "app.js"]
+#Nodemon hot reload app.js
+CMD ["nodemon", "app.js"]
+
+#Not hot reload
+#CMD ["node", "app.js"]
