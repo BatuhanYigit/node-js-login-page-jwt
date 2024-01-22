@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken")
+const APIError = require("../utils/errors")
+const user = require("../models/user.model")
 
 const createToken = async (userInfo, res) => {
-    console.log(userInfo);
-
     const payload = {
         sub: userInfo._id,
         name: userInfo.name
@@ -21,6 +21,28 @@ const createToken = async (userInfo, res) => {
 
 }
 
+const tokenCheck = async (req, res, next) => {
+    console.log("Test")
+    const headerToken = req.headers.authorization && req.headers.authorization.startsWith("Bearer ")
+
+    if (!headerToken)
+        throw new APIError("Invalid Token", 401)
+
+    const token = req.headers.authorization.split(" ")[1]
+
+    await jwt.verify(token, process.JWT_SECRET_KEY, async (err, decoded) => {
+        if (err) throw new APIError("Invalid Token", 401)
+
+        const userInfo = await user.findById(decoded.sub).select("_id name lastname email")
+
+        console.log(userInfo)
+
+    })
+
+    next();
+}
+
 module.exports = {
-    createToken
+    createToken,
+    tokenCheck
 }

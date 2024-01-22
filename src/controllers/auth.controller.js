@@ -59,7 +59,12 @@ const register = async (req, res) => {
 
 }
 
+const userAuth = async (req, res) => {
+    console.log("Auth ....")
+}
+
 module.exports = {
     login,
-    register
+    register,
+    userAuth
 }
