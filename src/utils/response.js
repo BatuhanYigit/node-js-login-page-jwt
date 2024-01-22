@@ -24,7 +24,7 @@ class Response {
         return res.status(500).json({
             success: false,
             data: this.data,
-            message: this.message ?? "Internal Server Error"
+            message: this.message ?? "Internal Server Error aaaaaa"
         })
     }
 

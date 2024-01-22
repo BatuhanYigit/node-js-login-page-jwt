@@ -11,6 +11,9 @@ services:
       DB_URL: "mongodb://root:example@mongodb:27017/"
     depends_on:
       - mongodb
+    
+    volumes:
+      - .:/usr/src/app
 
   mongodb:
     image: mongo:latest

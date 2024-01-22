@@ -5,7 +5,14 @@ const Response = require("../utils/response");
 
 
 const login = async (req, res) => {
-    console.log(req.body);
+    const { email, password } = req.body
+
+    const userInfo = await user.findOne({ email: email }) //db email: req.body.email
+
+    console.log(userInfo);
+
+    if (!user)
+        throw new APIError("Email or password Invalid ! ")
 
     return res.json(req.body)
 }
