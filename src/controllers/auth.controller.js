@@ -1,6 +1,7 @@
 const user = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const APIError = require("../utils/errors");
+const Response = require("../utils/response");
 
 
 const login = async (req, res) => {
@@ -24,26 +25,20 @@ const register = async (req, res) => {
 
     console.log("hashed password : ", req.body.password);
 
-    try {
-        const userSave = new user(req.body)
+    const userSave = new user(req.body)
 
-        await userSave.save()
-            .then((response) => {
-                return res.status(201).json({
-                    success: true,
-                    data: response,
-                    message: "Success"
-                })
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+    await userSave.save()
+        .then((data) => {
+
+            return new Response(data, "Account Created").created(res)
+        })
+        .catch((err) => {
+            throw new APIError("Account not created!", 400)
+        })
 
 
 
-    } catch (error) {
-        console.log(error);
-    }
+
 
 }
 
