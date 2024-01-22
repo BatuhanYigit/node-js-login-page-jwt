@@ -2,6 +2,7 @@ const user = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const APIError = require("../utils/errors");
 const Response = require("../utils/response");
+const { createToken } = require("../middlewares/auth");
 
 
 const login = async (req, res) => {
@@ -14,7 +15,7 @@ const login = async (req, res) => {
     if (!userInfo)
         throw new APIError("Email or password Invalid ! ", 401)
 
-    const comparePassword = await bcrypt.compare(password, userInfo.password)
+    const comparePassword = await bcrypt.compare(password, userInfo.password)//Password, Hashed db password
 
     console.log(comparePassword)
 
@@ -22,7 +23,8 @@ const login = async (req, res) => {
     if (!comparePassword)
         throw new APIError("Email or password Invalid !", 401)
 
-    return res.json(req.body)
+    createToken(userInfo, res)
+
 }
 
 
