@@ -11,8 +11,16 @@ const login = async (req, res) => {
 
     console.log(userInfo);
 
-    if (!user)
-        throw new APIError("Email or password Invalid ! ")
+    if (!userInfo)
+        throw new APIError("Email or password Invalid ! ", 401)
+
+    const comparePassword = await bcrypt.compare(password, userInfo.password)
+
+    console.log(comparePassword)
+
+
+    if (!comparePassword)
+        throw new APIError("Email or password Invalid !", 401)
 
     return res.json(req.body)
 }
