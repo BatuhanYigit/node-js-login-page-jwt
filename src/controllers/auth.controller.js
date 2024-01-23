@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const APIError = require("../utils/errors");
 const Response = require("../utils/response");
 const { createToken } = require("../middlewares/auth");
+const { response } = require("express");
 
 
 const login = async (req, res) => {
@@ -53,14 +54,10 @@ const register = async (req, res) => {
             throw new APIError("Account not created!", 400)
         })
 
-
-
-
-
 }
 
 const userAuth = async (req, res) => {
-    console.log("Auth ....")
+    return new Response(req.user).success(res)
 }
 
 module.exports = {
