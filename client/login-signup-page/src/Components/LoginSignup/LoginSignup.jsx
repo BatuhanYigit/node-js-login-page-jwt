@@ -19,7 +19,7 @@ export const LoginSignup = () => {
     const [password, setPassword] = useState('');
 
     const handleRegister = () => {
-        if (action == "Login" && !name) {
+        if (action == "Login") {
             setAction('Sign Up');
         } else {
             const userRegister = {
@@ -48,8 +48,8 @@ export const LoginSignup = () => {
 
                         })
 
+                        console.log('Register successfull');
 
-                        console.log('Login successfull');
 
                         setAction('Register');
                     } else {
@@ -111,7 +111,10 @@ export const LoginSignup = () => {
                         })
 
 
-                        console.log('Login successfull');
+                        console.log('Token = ', data.token);
+
+
+
 
                         setAction('Login');
                     } else {
