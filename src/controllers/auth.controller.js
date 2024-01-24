@@ -7,6 +7,7 @@ const { response } = require("express");
 
 
 const login = async (req, res) => {
+    console.log("Login geldi")
     const { email, password } = req.body
 
     const userInfo = await user.findOne({ email: email }) //db email: req.body.email
