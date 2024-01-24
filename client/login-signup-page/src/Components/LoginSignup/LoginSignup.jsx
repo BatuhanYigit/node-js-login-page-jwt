@@ -42,6 +42,13 @@ export const LoginSignup = () => {
                 .then(data => {
                     if (data.success) {
 
+                        notifications.show({
+                            color: "green",
+                            title: 'Welcome',
+                            message: data.message,
+
+                        })
+
 
                         console.log('Login successfull');
 
