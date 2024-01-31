@@ -51,7 +51,7 @@ export const LoginSignup = () => {
                         console.log('Register successfull');
 
 
-                        setAction('Register');
+                        setAction('Login');
                     } else {
                         notifications.show({
                             color: 'red',
