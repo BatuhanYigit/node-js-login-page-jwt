@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginSignup.css'
-
-import user_icon from '../Assets/person.png'
-import email_icon from '../Assets/email.png'
-import password_icon from '../Assets/password.png'
+import user_icon from '../Assets/person.png';
+import email_icon from '../Assets/email.png';
+import password_icon from '../Assets/password.png';
 import { notifications } from '@mantine/notifications';
 
 import '@mantine/notifications/styles.css';
@@ -11,6 +11,7 @@ import '@mantine/notifications/styles.css';
 
 
 export const LoginSignup = () => {
+    const navigate = useNavigate();
 
     const [action, setAction] = useState("Login");
     const [name, setName] = useState('');
@@ -111,12 +112,15 @@ export const LoginSignup = () => {
                         })
 
 
+
+
                         console.log('Token = ', data.token);
 
 
 
 
                         setAction('Login');
+                        navigate('/dashboard');
                     } else {
                         notifications.show({
                             color: 'red',

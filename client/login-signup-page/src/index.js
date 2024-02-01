@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
+import DashBoard from './Components/Dashboard/DashBoard';
 import '@mantine/notifications/styles.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
